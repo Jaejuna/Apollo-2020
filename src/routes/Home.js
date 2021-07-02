@@ -19,6 +19,7 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
 `;
+
 const Header = styled.header`
   background-image: linear-gradient(-45deg, #d754ab, #fd723a);
   height: 45vh;
@@ -29,19 +30,31 @@ const Header = styled.header`
   align-items: center;
   width: 100%;
 `;
+
 const Title = styled.h1`
   font-size: 60px;
   font-weight: 600;
   margin-bottom: 20px;
 `;
+
 const Subtitle = styled.h3`
   font-size: 35px;
 `;
+
 const Loading = styled.div`
   font-size: 18px;
   opacity: 0.5;
   font-weight: 500;
   margin-top: 10px;
+`;
+
+const Movies = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 25px;
+  width: 60%;
+  position: relative;
+  top: -50px;
 `;
 
 export default () => {
@@ -53,9 +66,13 @@ export default () => {
         <Subtitle>I love GraphQL</Subtitle>
       </Header>
       {loading && <Loading>Loading...</Loading>}
-      {!loading &&
-        data.movies &&
-        data.movies.map(m => <Movie key={m.id} id={m.id} />)}
+      {!loading && data.movies && (
+        <Movies>
+          {data.movies.map(m => (
+            <Movie key={m.id} id={m.id} bg={m.medium_cover_image} />
+          ))}
+        </Movies>
+      )}
     </Container>
   );
 };
